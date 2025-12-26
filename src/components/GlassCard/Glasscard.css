@@ -1,0 +1,181 @@
+/* CSS Variables for customization */
+:root {
+  --glass-bg-light: rgba(255, 255, 255, 0.1);
+  --glass-bg-dark: rgba(15, 23, 42, 0.2);
+  --glass-blur: 10px;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-border-colorful: 1px solid rgba(120, 119, 198, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-shadow-hover: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+  --glass-gradient-light: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  --glass-gradient-dark: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  --glass-gradient-colorful: linear-gradient(135deg, 
+    rgba(120, 119, 198, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  --transition-speed: 0.3s;
+}
+
+/* Base Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* Background variants */
+.glass-card--default {
+  background: var(--glass-gradient-light);
+  border: var(--glass-border);
+  background-color: var(--glass-bg-light);
+}
+
+.glass-card--light {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-card--dark {
+  background: var(--glass-gradient-dark);
+  background-color: var(--glass-bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.glass-card--colorful {
+  background: var(--glass-gradient-colorful);
+  background-color: rgba(120, 119, 198, 0.15);
+  border: var(--glass-border-colorful);
+}
+
+.glass-card--dark::before,
+.glass-card--colorful::before {
+  background: linear-gradient(
+    135deg,
+    rgba(120, 119, 198, 0.5),
+    rgba(255, 255, 255, 0.2),
+    rgba(120, 119, 198, 0.3)
+  );
+}
+
+/* Hover effects */
+.glass-card--hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.glass-card--hover:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.glass-card--dark.glass-card--hover:hover::before,
+.glass-card--colorful.glass-card--hover:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(120, 119, 198, 0.7),
+    rgba(255, 255, 255, 0.4),
+    rgba(120, 119, 198, 0.5)
+  );
+}
+
+/* Clickable card styling */
+.glass-card[role="button"] {
+  cursor: pointer;
+  user-select: none;
+}
+
+.glass-card[role="button"]:focus-visible {
+  outline: 2px solid rgba(120, 119, 198, 0.5);
+  outline-offset: 2px;
+}
+
+/* Animation for subtle shimmer effect */
+@keyframes subtle-shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.glass-card--hover:hover::before {
+  animation: subtle-shimmer 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --glass-blur: 8px;
+  }
+  
+  .glass-card {
+    --card-padding: 1.25rem;
+    --card-border-radius: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --glass-blur: 6px;
+  }
+  
+  .glass-card {
+    --card-padding: 1rem;
+    --card-border-radius: 0.75rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+  
+  .glass-card::before {
+    display: none;
+  }
+}
