@@ -1,0 +1,24 @@
+portfolio-website/
+├── public/
+│   ├── vite.svg
+│   └── placeholder-image.png
+├── src/
+│   ├── components/
+│   │   ├── Hero.jsx
+│   │   ├── About.jsx
+│   │   ├── FeaturedWork.jsx
+│   │   ├── Timeline.jsx
+│   │   ├── Contact.jsx
+│   │   └── SectionWrapper.jsx
+│   ├── hooks/
+│   │   └── useCollapsible.js
+│   ├── data/
+│   │   ├── timelineData.js
+│   │   └── featuredWorkData.js
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
